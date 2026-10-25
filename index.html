@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AnivoidTV — Stream Anime Online for Free</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="apple-touch-icon" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  body{ display:flex; flex-direction:column; min-height:100vh; }
+  .banner{ position:relative; height:clamp(150px,26vw,270px); overflow:hidden; background:
+    radial-gradient(ellipse 520px 260px at 20% 110%, #ff6fa566, transparent),
+    radial-gradient(ellipse 560px 280px at 82% 100%, #8b5cf666, transparent),
+    radial-gradient(ellipse 380px 200px at 55% 0%, #3fa8e833, transparent), #19131f; }
+  .banner::before{ content:""; position:absolute; inset:0; background-image:radial-gradient(#ffffff55 1px,transparent 1.5px),radial-gradient(#ffffff33 1px,transparent 1.5px); background-size:90px 90px,53px 53px; background-position:0 0,27px 31px; opacity:.5; }
+  .banner::after{ content:""; position:absolute; inset:auto 0 0 0; height:60%; background:linear-gradient(0deg,var(--bg),transparent); }
+  .banner .petal{ top:-20px; font-size:18px; }
+  .card{ position:relative; z-index:2; width:min(1080px,calc(100% - 28px)); margin:-70px auto 0; display:grid; grid-template-columns:minmax(0,420px) minmax(0,1fr); background:var(--glass); border:1px solid var(--line); border-radius:20px; overflow:hidden; box-shadow:0 40px 80px -30px #000; backdrop-filter:blur(8px); }
+  .card>div{ padding:34px; }
+  .card .left{ border-right:1px solid var(--line); }
+  .brand{ display:flex; align-items:center; gap:12px; margin-bottom:26px; }
+  .brand img{ width:54px; height:54px; border-radius:15px; object-fit:cover; border:1px solid var(--line); }
+  .brand b{ font-family:var(--font-display); font-size:32px; font-weight:600; }
+  .brand b span{ color:var(--blush); }
+  .s-box{ display:flex; align-items:center; gap:10px; background:var(--bg); border:1.5px solid var(--line); border-radius:12px; padding:0 14px; height:50px; transition:border-color .15s, box-shadow .15s; }
+  .s-box:focus-within{ border-color:var(--blush); box-shadow:0 0 0 3px var(--blush-dim); }
+  .s-box svg{ width:18px; height:18px; color:var(--muted); }
+  .s-box input{ flex:1; background:none; border:0; outline:none; color:var(--text); font-size:15px; font-family:var(--font-body); min-width:0; }
+  .popular{ margin-top:20px; font-size:13.5px; line-height:1.9; color:var(--muted); }
+  .popular b{ color:#d8d2e0; }
+  .popular a{ color:var(--text); font-weight:500; } .popular a:hover{ color:var(--blush); }
+  .home-cta{ margin-top:24px; }
+  .right h2{ font-family:var(--font-display); font-size:22px; font-weight:600; margin:0 0 8px; color:#dcd5e6; }
+  .right p{ color:var(--muted); font-size:13.5px; line-height:1.7; margin-bottom:18px; }
+  .right h2.sm{ font-size:18px; margin-top:6px; }
+  .id-capsule{ background:var(--bg); border:1px solid var(--line); border-radius:16px; padding:18px; margin:6px 0 4px; }
+  .id-capsule-label{ font-family:var(--font-mono); font-size:11.5px; color:var(--muted); letter-spacing:.5px; margin-bottom:10px; display:block; }
+  .id-entry-row{ display:flex; gap:9px; }
+  .id-entry-input{ flex:1; min-width:0; background:var(--bg-raise); border:1.5px solid var(--line); color:var(--text); font-family:var(--font-mono); font-size:16px; letter-spacing:1px; padding:12px 14px; border-radius:11px; outline:none; transition:border-color .15s, box-shadow .15s; }
+  .id-entry-input::placeholder{ color:#635a72; letter-spacing:.3px; }
+  .id-entry-input:focus{ border-color:var(--blush); box-shadow:0 0 0 3px var(--blush-dim); }
+  .watch-btn{ background:linear-gradient(135deg,var(--blush),var(--caramel)); border:0; color:#1c1420; font-family:var(--font-display); font-weight:600; font-size:15px; padding:0 22px; border-radius:11px; cursor:pointer; white-space:nowrap; display:flex; align-items:center; gap:7px; transition:transform .12s, opacity .12s; }
+  .watch-btn:hover{ transform:translateY(-1px); } .watch-btn:disabled{ opacity:.55; cursor:not-allowed; transform:none; }
+  .watch-btn svg{ width:16px; height:16px; }
+  .id-status{ margin-top:10px; font-family:var(--font-mono); font-size:12px; color:var(--muted); min-height:16px; }
+  .id-status.err{ color:#ff6b6b; }
+  .no-id-note{ font-size:12.5px; color:var(--muted); margin-top:10px; }
+  .no-id-note a{ color:var(--telegram); font-weight:600; } .no-id-note a:hover{ text-decoration:underline; }
+  .feat{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin-top:20px; }
+  .feat div{ background:var(--bg); border:1px solid var(--line); border-radius:12px; padding:12px 14px; font-size:12.5px; color:#cfc8da; line-height:1.5; }
+  .feat b{ display:block; font-size:13.5px; margin-bottom:2px; color:var(--text); }
+  .top-actions{ position:absolute; top:14px; right:16px; z-index:3; }
+  main{ flex:1; padding-bottom:10px; }
+  @media (max-width:860px){
+    .card{ grid-template-columns:1fr; margin-top:-50px; }
+    .card>div{ padding:24px 18px; }
+    .card .left{ border-right:0; border-bottom:1px solid var(--line); text-align:center; }
+    .brand{ justify-content:center; flex-direction:column; gap:8px; } .brand b{ font-size:28px; }
+    .id-entry-row{ flex-direction:column; } .watch-btn{ padding:13px; justify-content:center; }
+    .feat{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="banner" aria-hidden="true"></div>
+<div class="top-actions nav-right"><div id="nav-slot"></div></div>
+
+<main>
+  <div class="card">
+    <div class="left">
+      <div class="brand"><img src="assets/logo.jpg" alt="AnivoidTV logo"><b>Anivoid<span>TV</span></b></div>
+      <form class="s-box" id="s-form" role="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="s-input" type="search" placeholder="Search anime titles…" maxlength="100" aria-label="Search anime titles">
+      </form>
+      <p class="popular"><b>Popular searches:</b> <span id="popular">Solo Leveling, One Piece, Naruto, Bleach, Jujutsu Kaisen, Re:ZERO</span></p>
+      <div class="home-cta"><a class="btn primary" href="home.html" style="padding:13px 22px">Visit Home <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
+    </div>
+
+    <div class="right">
+      <h2>AnivoidTV — Stream Anime Online for FREE</h2>
+      <p>A free anime player with English subtitles and dubbed audio. Browse what's airing, track your watch list, and jump straight into an episode.</p>
+
+      <div class="id-capsule">
+        <span class="id-capsule-label">HAVE AN ANIME ID?</span>
+        <div class="id-entry-row">
+          <input id="id-entry-input" class="id-entry-input" type="text" inputmode="numeric" placeholder="e.g. 8904">
+          <button id="watch-btn" class="watch-btn" onclick="goWatch()">
+            <span>Watch Now</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+        <div class="id-status" id="id-status"></div>
+        <p class="no-id-note">Don't have an ID? Grab one from our <a data-telegram-link href="#" target="_blank" rel="noopener">Telegram channel</a>, or just search above.</p>
+      </div>
+
+      <div class="feat">
+        <div><b>🔎 Search &amp; discover</b>Top anime, schedule and finished series.</div>
+        <div><b>⏯️ Continue watching</b>Pick up right where you left off.</div>
+        <div><b>📚 Your watch list</b>Create a profile to organise what you watch.</div>
+        <div><b>✨ Earn VP &amp; ranks</b>Unlock badges and profile effects.</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="assets/nav.js"></script>
+<script src="assets/site.js"></script>
+<script>
+  // floating petals on the banner
+  (function(){
+    const b = document.querySelector(".banner");
+    for(let i = 0; i < 12; i++){
+      const s = document.createElement("span");
+      s.className = "petal"; s.textContent = "🌸";
+      s.style.left = (i * 8.5 + 2) + "%"; s.style.animationDuration = (6 + (i % 5) * 2) + "s"; s.style.animationDelay = "-" + (i * 1.1) + "s";
+      b.appendChild(s);
+    }
+  })();
+
+  document.getElementById("s-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const q = document.getElementById("s-input").value.trim();
+    if(q) location.href = "search.html?keyword=" + encodeURIComponent(q);
+  });
+
+  // popular searches from the weekly top list (falls back to the static text)
+  fetch("/api/v1/top-ten").then(r => r.ok ? r.json() : null).then(j => {
+    const list = j && j.results && j.results.week;
+    if(!list || !list.length) return;
+    document.getElementById("popular").innerHTML = list.slice(0, 8).map(a => '<a href="search.html?keyword=' + encodeURIComponent(a.title) + '">' + AVTV.esc(a.title) + "</a>").join(", ");
+  }).catch(() => {});
+
+  const input = document.getElementById("id-entry-input");
+  const status = document.getElementById("id-status");
+  const btn = document.getElementById("watch-btn");
+
+  function goWatch(){
+    const id = input.value.trim();
+    if(!id){ status.textContent = "Enter an anime ID first."; status.classList.add("err"); input.focus(); return; }
+    status.classList.remove("err");
+    btn.disabled = true;
+    window.location.href = "watch.html?id=" + encodeURIComponent(id);
+  }
+  input.addEventListener("keydown", (e) => { if(e.key === "Enter") goWatch(); });
+  input.addEventListener("input", () => { status.textContent = ""; status.classList.remove("err"); });
+
+  document.addEventListener("contextmenu", e => e.preventDefault());
+  document.addEventListener("keydown", e => {
+    const k = e.key;
+    if(k === "F12" || (e.ctrlKey && e.shiftKey && (k === "I" || k === "J" || k === "C")) || (e.ctrlKey && k === "U")) e.preventDefault();
+  });
+</script>
+</body>
+</html>
