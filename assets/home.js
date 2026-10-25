@@ -97,7 +97,7 @@
     try {
       let rows;
       if (tab === "trending") {
-        const j = await getJSON("/api/v1/top-ten");
+        const j = await getJSON("/api/top-ten");
         rows = (j.results.week || []).map((t) => ({ id: t.id, title: t.title, poster: t.poster, status: "" }));
         totalPages = 1; page = 1;
       } else {
