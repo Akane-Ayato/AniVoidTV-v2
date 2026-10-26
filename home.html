@@ -7,9 +7,11 @@
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="apple-touch-icon" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 <link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/effects.css">
+<link rel="stylesheet" href="assets/theme.css">
 <link rel="stylesheet" href="assets/home.css">
 </head>
 <body class="home">
@@ -67,8 +69,8 @@
 <section class="hero-h" id="hero" aria-label="Spotlight">
   <div class="hero-sk" id="hero-sk"></div>
   <div class="hero-nav" id="hero-nav" style="display:none">
-    <button type="button" id="hero-prev" aria-label="Previous">‹</button>
-    <button type="button" id="hero-next" aria-label="Next">›</button>
+    <button type="button" id="hero-prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <button type="button" id="hero-next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
   </div>
 </section>
 
@@ -109,9 +111,9 @@
         <div class="sched-head">
           <h2>Estimated Schedule <small id="now-clock"></small></h2>
           <div class="days-row">
-            <button class="arrow" id="days-prev" type="button" aria-label="Previous days">‹</button>
+            <button class="arrow" id="days-prev" type="button" aria-label="Previous days"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
             <div class="days" id="days"></div>
-            <button class="arrow" id="days-next" type="button" aria-label="Next days">›</button>
+            <button class="arrow" id="days-next" type="button" aria-label="Next days"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
           </div>
         </div>
         <div class="sched-list" id="sched-list"></div>
@@ -125,6 +127,7 @@
 <div id="site-footer"></div>
 
 <script src="assets/nav.js"></script>
+<script src="assets/icons.js"></script>
 <script src="assets/site.js"></script>
 <script src="assets/home.js"></script>
 </body>
