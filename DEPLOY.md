@@ -1,43 +1,35 @@
-# AnivoidTV frontend: deploy guide
+# AnivoidTV frontend: deploy guide (v2, "Aurora Ink")
 
-Static site + Vercel serverless proxies. The browser only ever calls **your own domain**; the proxies hide the real API URLs and
-keep the login cookie first-party.
+Static site + Vercel serverless proxies. The browser only calls **your own domain**; the proxies hide the real API URLs and keep the login cookie first-party.
 
 ## Pages
 | File | What |
 |---|---|
 | `index.html` | landing (search, popular searches, **Visit Home**, watch-by-ID) |
-| `home.html` | main panel: navbar, spotlight hero, Continue Watching, Latest (paginated), Top anime, schedule, footer |
-| `recent.html` · `aired.html` · `upcoming.html` · `search.html` | listing pages (drawer menu links to all) |
-| `details.html` | details + **Add to list** + comments |
-| `watch.html` | player (resumes the last episode, records Continue Watching, counts watched episodes) |
-| `profile.html` | your dashboard: rank/VP, stats, badges, favorites, Continue Watching, Watch List, Settings (avatar effects, privacy, username, password) |
+| `home.html` | spotlight hero, Continue Watching, Latest (paginated), Top anime, schedule, footer |
+| `recent.html` · `aired.html` · `upcoming.html` · `search.html` | listing pages |
+| `details.html` | details, **Add to list**, comments with animated reactions + stickers |
+| `watch.html` | player (resumes the last episode, tracks Continue Watching and watched episodes) |
+| `profile.html` | your dashboard: banner + avatar card, rank/VP, badges, favorites, **Customize** (display name, 5 effect slots, banner presets, default avatar), **Pictures** (galleries, crop, set main), Continue Watching, Watch List, Settings (bio, privacy, username, password, devices) |
+| `shop.html` | **Void Shop**: 101 effects, titles, sticker packs, live previews with your own avatar/name |
 | `user.html?u=name` | public profile |
 
-Shared code: `assets/site.js` (auth popup, profile menu, avatars, continue-watching store, footer), `assets/community.js`
-(list button + comments), `assets/home.js`, `assets/profile*.js`, styles in `assets/*.css`.
+Code: `assets/site.js` (auth popup, menu, avatars/names/titles, continue-watching store, footer), `icons.js` (all icons, liquid badges, animated reactions, **no emoji anywhere**), `stickers.js` (40 original animated stickers), `community.js`, `cropper.js`, `profile*.js`, `shop.js`, `home.js`, page scripts in `assets/pages/`.
+Styles: `style.css` (base) → `site.css` → `effects.css` (**generated**, see below) → `theme.css` (Aurora Ink) → page CSS.
 
 ## Vercel setup
-Project → Settings → Environment Variables:
+Settings → Environment Variables: `BACKEND_URL` (e.g. `https://anivoid-api-xxxx.onrender.com`) and `PROXY_SECRET` (same value as on the backend). Redeploy after changing them, then open `/api/v1/_debug`.
+Files that must be in the repo root: `vercel.json` (rewrite `/api/v1/*` to `api/proxy.js`, **security headers + CSP**) and `api/proxy.js` (allow-listed forwarding, binary-safe media, 3 MB upload limit). The old `api/v1/` folder must not exist.
 
-| Name | Value |
-|---|---|
-| `BACKEND_URL` | your backend, e.g. `https://anivoid-api.onrender.com` (no trailing slash) |
-| `PROXY_SECRET` | any long random string, **same value** as `PROXY_SECRET` on the backend |
+## Security notes
+* `vercel.json` sets a strict **Content-Security-Policy**: scripts only from your own files (+ Google sign-in), no inline scripts, no inline handlers (all pages were converted). Because the player pages embed third-party players, `frame-src` allows any `https:` source: tighten it to your real player hosts when you know them. Also sets HSTS, nosniff, frame, referrer, permissions and COOP headers.
+* **Never commit a Google `client_secret` / `client_secret_*.json` / `google auth.json`.** The site only needs the public client id (set on the backend as `GOOGLE_CLIENT_ID`). If a secret was ever pushed to a public repo, delete the file *and* rotate the secret in Google Cloud Console (git history keeps old files).
+* All user text is rendered with escaping/`textContent`; uploaded pictures are re-encoded by the backend.
 
-Proxies: `api/recent.js`, `api/series/[id].js` (official API, unchanged) and `api/v1/[...path].js` (everything on your backend:
-search, schedule, top-ten, completed, upcoming, accounts, comments, lists).
-
-## Backend side
-See the backend README, section "Accounts & community": MongoDB Atlas URI, `SESSION_SECRET`, optional `GOOGLE_CLIENT_ID`
-(add your Vercel domain to the OAuth client's *Authorized JavaScript origins*).
-
-## Local preview
-`npx vercel dev` (runs the pages and the `/api` proxies, set the env vars in `.env`), or open the files through any static server for
-a UI-only look (API calls will fail without the proxies).
+## Effects CSS
+`assets/effects.css` is generated from the backend catalog: in the backend repo run `python tools/gen_effects.py ../AniVoidTV/assets/effects.css`. Item id `frame.spin_aurora` ⇄ class `fx-frame-spin_aurora`.
 
 ## Notes
-* Friends and Notification tabs are visible but marked "soon" (next update).
-* Schedule times are shown as provided by the source site (timezone not guaranteed).
-* The Konosuba-style character art from the reference screenshots is not included (copyrighted). The popup uses your logo and a
-  petal animation; drop your own art into `.auth-art` in `assets/site.js` if you have rights to an image.
+* Friends and Notifications tabs show "coming soon" (next update).
+* Schedule times are shown as provided by the source (timezone not guaranteed).
+* Animations respect `prefers-reduced-motion`.
