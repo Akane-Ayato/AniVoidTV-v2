@@ -7,15 +7,17 @@
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="apple-touch-icon" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 <link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/effects.css">
+<link rel="stylesheet" href="assets/theme.css">
 <style>
   body{ display:flex; flex-direction:column; min-height:100vh; }
   .banner{ position:relative; height:clamp(150px,26vw,270px); overflow:hidden; background:
-    radial-gradient(ellipse 520px 260px at 20% 110%, #ff6fa566, transparent),
-    radial-gradient(ellipse 560px 280px at 82% 100%, #8b5cf666, transparent),
-    radial-gradient(ellipse 380px 200px at 55% 0%, #3fa8e833, transparent), #19131f; }
+    radial-gradient(ellipse 520px 260px at 20% 110%, #8a7bff66, transparent),
+    radial-gradient(ellipse 560px 280px at 82% 100%, #7c6bff66, transparent),
+    radial-gradient(ellipse 380px 200px at 55% 0%, #3fa8e833, transparent), #0a1020; }
   .banner::before{ content:""; position:absolute; inset:0; background-image:radial-gradient(#ffffff55 1px,transparent 1.5px),radial-gradient(#ffffff33 1px,transparent 1.5px); background-size:90px 90px,53px 53px; background-position:0 0,27px 31px; opacity:.5; }
   .banner::after{ content:""; position:absolute; inset:auto 0 0 0; height:60%; background:linear-gradient(0deg,var(--bg),transparent); }
   .banner .petal{ top:-20px; font-size:18px; }
@@ -31,27 +33,27 @@
   .s-box svg{ width:18px; height:18px; color:var(--muted); }
   .s-box input{ flex:1; background:none; border:0; outline:none; color:var(--text); font-size:15px; font-family:var(--font-body); min-width:0; }
   .popular{ margin-top:20px; font-size:13.5px; line-height:1.9; color:var(--muted); }
-  .popular b{ color:#d8d2e0; }
+  .popular b{ color:#cdd7f2; }
   .popular a{ color:var(--text); font-weight:500; } .popular a:hover{ color:var(--blush); }
   .home-cta{ margin-top:24px; }
-  .right h2{ font-family:var(--font-display); font-size:22px; font-weight:600; margin:0 0 8px; color:#dcd5e6; }
+  .right h2{ font-family:var(--font-display); font-size:22px; font-weight:600; margin:0 0 8px; color:#d0daf5; }
   .right p{ color:var(--muted); font-size:13.5px; line-height:1.7; margin-bottom:18px; }
   .right h2.sm{ font-size:18px; margin-top:6px; }
   .id-capsule{ background:var(--bg); border:1px solid var(--line); border-radius:16px; padding:18px; margin:6px 0 4px; }
   .id-capsule-label{ font-family:var(--font-mono); font-size:11.5px; color:var(--muted); letter-spacing:.5px; margin-bottom:10px; display:block; }
   .id-entry-row{ display:flex; gap:9px; }
   .id-entry-input{ flex:1; min-width:0; background:var(--bg-raise); border:1.5px solid var(--line); color:var(--text); font-family:var(--font-mono); font-size:16px; letter-spacing:1px; padding:12px 14px; border-radius:11px; outline:none; transition:border-color .15s, box-shadow .15s; }
-  .id-entry-input::placeholder{ color:#635a72; letter-spacing:.3px; }
+  .id-entry-input::placeholder{ color:#55628a; letter-spacing:.3px; }
   .id-entry-input:focus{ border-color:var(--blush); box-shadow:0 0 0 3px var(--blush-dim); }
-  .watch-btn{ background:linear-gradient(135deg,var(--blush),var(--caramel)); border:0; color:#1c1420; font-family:var(--font-display); font-weight:600; font-size:15px; padding:0 22px; border-radius:11px; cursor:pointer; white-space:nowrap; display:flex; align-items:center; gap:7px; transition:transform .12s, opacity .12s; }
+  .watch-btn{ background:linear-gradient(135deg,var(--blush),var(--caramel)); border:0; color:#04101a; font-family:var(--font-display); font-weight:600; font-size:15px; padding:0 22px; border-radius:11px; cursor:pointer; white-space:nowrap; display:flex; align-items:center; gap:7px; transition:transform .12s, opacity .12s; }
   .watch-btn:hover{ transform:translateY(-1px); } .watch-btn:disabled{ opacity:.55; cursor:not-allowed; transform:none; }
   .watch-btn svg{ width:16px; height:16px; }
   .id-status{ margin-top:10px; font-family:var(--font-mono); font-size:12px; color:var(--muted); min-height:16px; }
-  .id-status.err{ color:#ff6b6b; }
+  .id-status.err{ color:#ff6b86; }
   .no-id-note{ font-size:12.5px; color:var(--muted); margin-top:10px; }
   .no-id-note a{ color:var(--telegram); font-weight:600; } .no-id-note a:hover{ text-decoration:underline; }
   .feat{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin-top:20px; }
-  .feat div{ background:var(--bg); border:1px solid var(--line); border-radius:12px; padding:12px 14px; font-size:12.5px; color:#cfc8da; line-height:1.5; }
+  .feat div{ display:grid; grid-template-columns:auto 1fr; column-gap:12px; align-items:center; background:var(--bg); border:1px solid var(--line); border-radius:12px; padding:12px 14px; font-size:12.5px; color:#c3cfee; line-height:1.5; }
   .feat b{ display:block; font-size:13.5px; margin-bottom:2px; color:var(--text); }
   .top-actions{ position:absolute; top:14px; right:16px; z-index:3; }
   main{ flex:1; padding-bottom:10px; }
@@ -90,7 +92,7 @@
         <span class="id-capsule-label">HAVE AN ANIME ID?</span>
         <div class="id-entry-row">
           <input id="id-entry-input" class="id-entry-input" type="text" inputmode="numeric" placeholder="e.g. 8904">
-          <button id="watch-btn" class="watch-btn" onclick="goWatch()">
+          <button id="watch-btn" class="watch-btn">
             <span>Watch Now</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
           </button>
@@ -100,10 +102,10 @@
       </div>
 
       <div class="feat">
-        <div><b>🔎 Search &amp; discover</b>Top anime, schedule and finished series.</div>
-        <div><b>⏯️ Continue watching</b>Pick up right where you left off.</div>
-        <div><b>📚 Your watch list</b>Create a profile to organise what you watch.</div>
-        <div><b>✨ Earn VP &amp; ranks</b>Unlock badges and profile effects.</div>
+        <div data-ic="search|aqua"><b>Search &amp; discover</b>Top anime, schedule and finished series.</div>
+        <div data-ic="clock|iris"><b>Continue watching</b>Pick up right where you left off.</div>
+        <div data-ic="books|violet"><b>Your watch list</b>Create a profile to organise what you watch.</div>
+        <div data-ic="sparkle|amber"><b>Earn VP &amp; ranks</b>Unlock badges and profile effects.</div>
       </div>
     </div>
   </div>
@@ -112,51 +114,8 @@
 <div id="site-footer"></div>
 
 <script src="assets/nav.js"></script>
+<script src="assets/icons.js"></script>
 <script src="assets/site.js"></script>
-<script>
-  // floating petals on the banner
-  (function(){
-    const b = document.querySelector(".banner");
-    for(let i = 0; i < 12; i++){
-      const s = document.createElement("span");
-      s.className = "petal"; s.textContent = "🌸";
-      s.style.left = (i * 8.5 + 2) + "%"; s.style.animationDuration = (6 + (i % 5) * 2) + "s"; s.style.animationDelay = "-" + (i * 1.1) + "s";
-      b.appendChild(s);
-    }
-  })();
-
-  document.getElementById("s-form").addEventListener("submit", (e) => {
-    e.preventDefault();
-    const q = document.getElementById("s-input").value.trim();
-    if(q) location.href = "search.html?keyword=" + encodeURIComponent(q);
-  });
-
-  // popular searches from the weekly top list (falls back to the static text)
-  fetch("/api/v1/top-ten").then(r => r.ok ? r.json() : null).then(j => {
-    const list = j && j.results && j.results.week;
-    if(!list || !list.length) return;
-    document.getElementById("popular").innerHTML = list.slice(0, 8).map(a => '<a href="search.html?keyword=' + encodeURIComponent(a.title) + '">' + AVTV.esc(a.title) + "</a>").join(", ");
-  }).catch(() => {});
-
-  const input = document.getElementById("id-entry-input");
-  const status = document.getElementById("id-status");
-  const btn = document.getElementById("watch-btn");
-
-  function goWatch(){
-    const id = input.value.trim();
-    if(!id){ status.textContent = "Enter an anime ID first."; status.classList.add("err"); input.focus(); return; }
-    status.classList.remove("err");
-    btn.disabled = true;
-    window.location.href = "watch.html?id=" + encodeURIComponent(id);
-  }
-  input.addEventListener("keydown", (e) => { if(e.key === "Enter") goWatch(); });
-  input.addEventListener("input", () => { status.textContent = ""; status.classList.remove("err"); });
-
-  document.addEventListener("contextmenu", e => e.preventDefault());
-  document.addEventListener("keydown", e => {
-    const k = e.key;
-    if(k === "F12" || (e.ctrlKey && e.shiftKey && (k === "I" || k === "J" || k === "C")) || (e.ctrlKey && k === "U")) e.preventDefault();
-  });
-</script>
+<script src="assets/pages/index.js"></script>
 </body>
 </html>
