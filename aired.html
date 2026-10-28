@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finished Anime — AnivoidTV</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="apple-touch-icon" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/effects.css">
+<link rel="stylesheet" href="assets/decorations.css">
+<link rel="stylesheet" href="assets/bannerfx.css">
+<link rel="stylesheet" href="assets/theme.css">
+<style>
+  .wrap{ max-width:1080px; margin:0 auto; padding:26px 18px 40px; }
+
+  .page-head{ margin-bottom:22px; }
+  .page-head h1{ font-family:var(--font-display); font-size:24px; font-weight:600; margin-bottom:4px; }
+  .page-head p{ color:var(--muted); font-size:13.5px; }
+
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap:16px;
+  }
+
+  .grid-status{
+    text-align:center;
+    padding:40px 0;
+    color:var(--muted);
+    font-family:var(--font-mono);
+    font-size:13px;
+  }
+  .grid-status.err{ color:#ff6b86; }
+
+  @media (max-width:520px){
+    .grid{ grid-template-columns: repeat(auto-fill, minmax(108px, 1fr)); gap:12px; }
+    .wrap{ padding:20px 14px 32px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a class="logo" href="home.html">
+    <img class="logo-mark" src="assets/logo.jpg" alt="AnikotoTV logo">
+    <div class="logo-word">Anivoid<span>TV</span></div>
+  </a>
+  <div class="nav-right">
+    <button class="hamburger" id="menu-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav-overlay" id="nav-overlay"></div>
+<aside class="nav-drawer" id="nav-drawer">
+  <div class="drawer-head">
+    <img class="logo-mark" src="assets/logo.jpg" alt="AnikotoTV logo">
+    <div class="logo-word">Anivoid<span>TV</span></div>
+  </div>
+  <a class="drawer-link" data-page="home.html" href="home.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+    Home
+  </a>
+  <a class="drawer-link" data-page="recent.html" href="recent.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+    Recent
+  </a>
+  <a class="drawer-link" data-page="aired.html" href="aired.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>Finished Anime</a>
+  <a class="drawer-link" data-page="upcoming.html" href="upcoming.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>Upcoming Anime</a>
+  <a class="drawer-link" data-page="search.html" href="search.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+  <a class="drawer-link" data-page="index.html" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>Watch by ID</a>
+  <a class="drawer-link" data-telegram-link href="#" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.6c.2-1-.6-1.8-1.5-1.4L2.4 10.7c-1 .4-1 1.9.1 2.2l4.4 1.4 1.7 5.4c.2.7 1 .9 1.6.4l2.5-2.2 4.6 3.4c.8.6 1.9.1 2.1-.8l3.5-15.9z"/></svg>
+    Telegram
+  </a>
+  <a class="drawer-link" data-contact-link href="#" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+    Support
+  </a>
+  <div class="drawer-foot">AnivoidTV · Free anime player</div>
+</aside>
+
+<div class="wrap">
+  <div class="page-head">
+    <h1>Finished Anime</h1>
+    <p id="page-sub">Loading finished series…</p>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="pagination" id="pagination" style="display:none;">
+    <button class="page-btn" id="prev-btn">‹ Prev</button>
+    <div class="page-jump">
+      Page
+      <input id="page-input" type="text" inputmode="numeric" value="1">
+      of <span id="total-pages">—</span>
+      <button id="jump-btn">Go</button>
+    </div>
+    <button class="page-btn" id="next-btn">Next ›</button>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="assets/nav.js"></script>
+<script src="assets/icons.js"></script>
+<script src="assets/fx-recipes.js"></script>
+<script src="assets/decorations.js"></script>
+<script src="assets/bannerfx.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/pages/aired.js"></script>
+
+</body>
+</html>
