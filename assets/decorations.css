@@ -1,0 +1,39 @@
+/* Avatar decorations + animations. The SVG itself is built by decorations.js */
+.av{ --spd:1; position:relative; display:inline-block; width:var(--s,40px); height:var(--s,40px); flex-shrink:0; }
+.av:hover{ --spd:2.4; }
+.av-in{ position:absolute; inset:0; z-index:1; border-radius:50%; display:flex; align-items:center; justify-content:center; overflow:hidden; color:#fff; font-family:var(--font-display); font-size:calc(var(--s) * .42); box-shadow:inset 0 0 0 2px #120f16, inset 0 0 0 3px #ffffff1f; }
+.deco{ position:absolute; left:50%; top:50%; width:calc(var(--s) * 1.39); height:calc(var(--s) * 1.39); transform:translate(-50%,-50%); pointer-events:none; overflow:visible; }
+.deco.back{ z-index:0; } .deco.front{ z-index:2; }
+.av.has-deco{ cursor:pointer; }
+.deco *{ transform-box:view-box; transform-origin:0 0; }
+.deco [class^="a-"]{ animation-duration:calc(var(--t,3s) / var(--spd,1)); animation-delay:var(--d,0s); animation-iteration-count:infinite; animation-timing-function:ease-in-out; }
+.a-spin{ animation-name:dSpin; animation-timing-function:linear!important; } .a-spinR{ animation-name:dSpinR; animation-timing-function:linear!important; }
+.a-sway{ animation-name:dSway; animation-direction:alternate; } .a-pulse{ animation-name:dPulse; animation-direction:alternate; } .a-bloom{ animation-name:dBloom; animation-direction:alternate; }
+.a-flick{ animation-name:dFlick; animation-direction:alternate; } .a-twinkle{ animation-name:dTwinkle; } .a-bob{ animation-name:dBob; animation-direction:alternate; }
+.a-twitch{ animation-name:dTwitch; } .a-wiggle{ animation-name:dWiggle; animation-direction:alternate; } .a-glint{ animation-name:dTwinkle; }
+.a-flap{ animation-name:dFlap; animation-direction:alternate; } .a-rise{ animation-name:dRise; animation-timing-function:ease-out!important; } .a-fall{ animation-name:dFall; animation-timing-function:linear!important; }
+.a-puff{ animation-name:dPuff; animation-timing-function:ease-out!important; } .a-ripple{ animation-name:dRipple; animation-timing-function:ease-out!important; } .a-flash{ animation-name:dFlash; animation-timing-function:linear!important; }
+.a-blink{ animation-name:dBlink; animation-timing-function:steps(2,end)!important; } .a-glitch{ animation-name:dGlitch; animation-timing-function:steps(1,end)!important; } .a-dash{ animation:dDash 3s linear infinite; }
+@keyframes dSpin{ to{ transform:rotate(360deg); } } @keyframes dSpinR{ to{ transform:rotate(-360deg); } }
+@keyframes dSway{ from{ transform:rotate(-9deg); } to{ transform:rotate(9deg); } }
+@keyframes dPulse{ from{ transform:scale(.88); } to{ transform:scale(1.14); } }
+@keyframes dBloom{ from{ transform:scale(.7); } to{ transform:scale(1.12); } }
+@keyframes dFlick{ 0%{ transform:scale(1,.82) skewX(-4deg); } 50%{ transform:scale(.94,1.16) skewX(3deg); } 100%{ transform:scale(1.04,.92) skewX(-2deg); } }
+@keyframes dTwinkle{ 0%,100%{ opacity:.25; transform:scale(.6) rotate(0); } 50%{ opacity:1; transform:scale(1.15) rotate(45deg); } }
+@keyframes dBob{ from{ transform:translateY(-1.6px); } to{ transform:translateY(1.8px); } }
+@keyframes dTwitch{ 0%,70%,100%{ transform:rotate(0); } 76%{ transform:rotate(-9deg); } 84%{ transform:rotate(4deg); } 92%{ transform:rotate(-3deg); } }
+@keyframes dWiggle{ from{ transform:rotate(-5deg); } to{ transform:rotate(5deg); } }
+@keyframes dFlap{ from{ transform:rotate(-5deg) scaleX(1); } to{ transform:rotate(7deg) scaleX(.9); } }
+@keyframes dRise{ 0%{ transform:translateY(6px) scale(.5); opacity:0; } 25%{ opacity:1; } 100%{ transform:translateY(var(--dy,-18px)) scale(1) rotate(var(--rot,0deg)); opacity:0; } }
+@keyframes dFall{ 0%{ transform:translateY(calc(var(--dy,20px) * -1)) rotate(0); opacity:0; } 20%{ opacity:1; } 100%{ transform:translateY(var(--dy,20px)) rotate(var(--rot,180deg)); opacity:0; } }
+@keyframes dPuff{ 0%{ transform:translateY(0) scale(.4); opacity:.8; } 100%{ transform:translateY(var(--dy,-10px)) scale(1.5); opacity:0; } }
+@keyframes dRipple{ 0%{ transform:scale(.96); opacity:.9; } 100%{ transform:scale(1.34); opacity:0; } }
+@keyframes dFlash{ 0%,86%,100%{ opacity:0; } 88%{ opacity:1; } 91%{ opacity:.1; } 94%{ opacity:1; } 97%{ opacity:0; } }
+@keyframes dBlink{ 0%{ opacity:1; } 100%{ opacity:.15; } }
+@keyframes dGlitch{ 0%,100%{ transform:translate(0,0); } 20%{ transform:translate(1.6px,-.8px); } 40%{ transform:translate(-1.4px,.6px); } 60%{ transform:translate(.8px,1.2px); } 80%{ transform:translate(-.6px,-1px); } }
+@keyframes dDash{ to{ stroke-dashoffset:-30; } }
+/* click burst */
+.burst{ position:absolute; left:50%; top:50%; width:0; height:0; z-index:3; pointer-events:none; }
+.burst i{ position:absolute; width:6px; height:6px; margin:-3px; border-radius:2px; border:1px solid #120f16; animation:burstOut .8s cubic-bezier(.2,.8,.3,1) forwards; transform:rotate(var(--a)) translateY(0); }
+@keyframes burstOut{ to{ transform:rotate(var(--a)) translateY(calc(var(--d) * -1)) scale(.2) rotate(180deg); opacity:0; } }
+@media (prefers-reduced-motion:reduce){ .deco [class^="a-"],.a-dash{ animation:none!important; } .burst{ display:none; } }

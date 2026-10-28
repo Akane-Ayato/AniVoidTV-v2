@@ -1,0 +1,50 @@
+/* Banner scenes + free banner presets (flat print patterns, no gradients-for-the-sake-of-it) */
+.bfx{ position:absolute; inset:0; overflow:hidden; pointer-events:none; container-type:size; }
+.bfx>.bsky{ position:absolute; inset:0; opacity:.9; }
+.bfx>.bs{ position:absolute; inset:0; width:100%; height:100%; }
+.bpw{ position:absolute; top:0; animation:bYdown var(--t,8s) linear var(--d,0s) infinite; will-change:transform; }
+.bpw.bY-up{ animation-name:bYup; top:0; } .bpw.bY-diag{ animation-name:bYdiag; }
+.bp{ display:block; overflow:visible; animation:bSwayX var(--st,3s) ease-in-out infinite alternate, bSpin calc(var(--st,3s) * 3) linear infinite; }
+@keyframes bYdown{ from{ transform:translateY(-10cqh); } to{ transform:translateY(112cqh); } }
+@keyframes bYup{ from{ transform:translateY(112cqh); } to{ transform:translateY(-12cqh); } }
+@keyframes bYdiag{ from{ transform:translate(14cqw,-10cqh); } to{ transform:translate(-30cqw,112cqh); } }
+@keyframes bSwayX{ from{ margin-left:calc(var(--sw,10px) * -1); } to{ margin-left:var(--sw,10px); } }
+@keyframes bSpin{ from{ transform:rotate(0); } to{ transform:rotate(var(--rot,180deg)); } }
+.bstar{ position:absolute; border-radius:50%; animation:bTwinkle var(--t,3s) ease-in-out var(--d,0s) infinite; }
+@keyframes bTwinkle{ 0%,100%{ opacity:.2; transform:scale(.7); } 50%{ opacity:1; transform:scale(1.3); } }
+.bshoot{ position:absolute; width:70px; height:2px; background:linear-gradient(90deg,transparent,#fff); border-radius:2px; transform:rotate(-28deg); opacity:0; animation:bShoot var(--t,6s) ease-in var(--d,0s) infinite; }
+@keyframes bShoot{ 0%{ transform:translate(0,0) rotate(-28deg); opacity:0; } 4%{ opacity:1; } 14%{ transform:translate(-60cqw,28cqh) rotate(-28deg); opacity:0; } 100%{ opacity:0; } }
+.bfly{ position:absolute; width:5px; height:5px; border-radius:50%; box-shadow:0 0 8px 2px currentColor; animation:bWander var(--t,9s) ease-in-out var(--d,0s) infinite alternate, bGlow 2.4s ease-in-out var(--d,0s) infinite alternate; }
+@keyframes bWander{ 0%{ transform:translate(0,0); } 50%{ transform:translate(var(--x1),var(--y1)); } 100%{ transform:translate(var(--x2),var(--y2)); } }
+@keyframes bGlow{ from{ opacity:.35; } to{ opacity:1; } }
+.bdrop{ position:absolute; top:-20px; width:1.4px; border-radius:2px; opacity:.7; transform:rotate(12deg); animation:bRain var(--t,.7s) linear var(--d,0s) infinite; }
+@keyframes bRain{ from{ transform:translate(0,-10cqh) rotate(12deg); } to{ transform:translate(-14cqw,112cqh) rotate(12deg); } }
+.bflash{ position:absolute; inset:0; background:#dfe9ff; opacity:0; animation:bFlash 7s linear infinite; }
+.bbolt{ opacity:0; animation:bFlash 7s linear infinite; }
+@keyframes bFlash{ 0%,88%,100%{ opacity:0; } 89%{ opacity:.55; } 90.5%{ opacity:.05; } 92%{ opacity:.7; } 95%{ opacity:0; } }
+.bfog{ position:absolute; left:-20%; border-radius:50%; filter:blur(14px); opacity:.18; animation:bFogMove var(--t,20s) ease-in-out var(--d,0s) infinite alternate; }
+@keyframes bFogMove{ from{ transform:translateX(0); } to{ transform:translateX(34cqw); } }
+.bfly-x{ position:absolute; left:0; animation:bFlyX var(--t,16s) linear var(--d,0s) infinite; }
+@keyframes bFlyX{ from{ transform:translate(-14cqw,0); } 50%{ transform:translate(50cqw,-6cqh); } to{ transform:translate(112cqw,4cqh); } }
+.bbeam{ transform-origin:50% 0; animation:bBeam 8s ease-in-out var(--d,0s) infinite alternate; }
+@keyframes bBeam{ from{ opacity:.06; transform:skewX(-6deg); } to{ opacity:.2; transform:skewX(6deg); } }
+.bweed{ animation:bWeed 4s ease-in-out var(--d,0s) infinite alternate; } @keyframes bWeed{ from{ transform:rotate(-5deg); } to{ transform:rotate(5deg); } }
+.bfish{ position:absolute; left:0; width:22px; height:11px; animation:bFlyX var(--t,22s) linear var(--d,0s) infinite; }
+.bwin{ animation:bBlink 3s steps(2,end) var(--d,0s) infinite; } @keyframes bBlink{ 0%{ opacity:1; } 100%{ opacity:.25; } }
+.bcloud{ animation:bCloud var(--t,30s) linear var(--d,0s) infinite; } @keyframes bCloud{ from{ transform:translateX(-40px); } to{ transform:translateX(300px); } }
+.bwave{ animation:bWaveMove var(--t,8s) linear var(--d,0s) infinite; } @keyframes bWaveMove{ from{ transform:translateX(0); } to{ transform:translateX(-150px); } }
+.bjelly{ position:absolute; animation:bJelly var(--t,8s) ease-in-out var(--d,0s) infinite alternate; } .bjelly svg{ display:block; overflow:visible; }
+@keyframes bJelly{ from{ transform:translate(-8px,6px); } to{ transform:translate(10px,-14px); } }
+.bbell{ transform-origin:0 5px; animation:bBell 2.4s ease-in-out infinite alternate; } @keyframes bBell{ from{ transform:scale(1.08,.9); } to{ transform:scale(.92,1.1); } }
+.btent{ animation:bTent 2.4s ease-in-out var(--d,0s) infinite alternate; transform-origin:50% 0; } @keyframes bTent{ from{ transform:skewX(-6deg); } to{ transform:skewX(6deg); } }
+
+/* free banner presets: flat print patterns */
+.bp-p1{ background:repeating-conic-gradient(from 0deg at 50% 130%,#ff5a36 0 7deg,#d94426 7deg 14deg); }
+.bp-p2{ background:radial-gradient(#ffbe3b 26%,transparent 28%) 0 0/16px 16px,#1d1a26; }
+.bp-p3{ background:repeating-linear-gradient(135deg,#38d6a0 0 14px,#2bb88a 14px 28px); }
+.bp-p4{ background:conic-gradient(#1d1a26 25%,#2c2638 0 50%,#1d1a26 0 75%,#2c2638 0) 0 0/40px 40px; }
+.bp-p5{ background:repeating-conic-gradient(from 0deg at 50% 50%,#f4ead8 0 1.6deg,#17151d 1.6deg 6deg); }
+.bp-p6{ background:radial-gradient(circle at 100% 100%,transparent 44%,#3d7fd6 45% 52%,transparent 53%) 0 0/30px 30px,radial-gradient(circle at 0 100%,transparent 44%,#3d7fd6 45% 52%,transparent 53%) 0 0/30px 30px,#17294a; }
+.bp-p7{ background:linear-gradient(0deg,#f4ead8 0 68%,#17151d 68% 100%); }
+.bp-p8{ background:linear-gradient(#ffffff14 1px,transparent 1px) 0 0/16px 16px,linear-gradient(90deg,#ffffff14 1px,transparent 1px) 0 0/16px 16px,#3a1812; }
+@media (prefers-reduced-motion:reduce){ .bfx *{ animation:none!important; } }
