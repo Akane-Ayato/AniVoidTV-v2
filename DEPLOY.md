@@ -1,4 +1,4 @@
-# AnivoidTV frontend: deploy guide (v2, "Aurora Ink")
+# AnivoidTV frontend: deploy guide (v3, "Ink & Vermilion")
 
 Static site + Vercel serverless proxies. The browser only calls **your own domain**; the proxies hide the real API URLs and keep the login cookie first-party.
 
@@ -10,12 +10,13 @@ Static site + Vercel serverless proxies. The browser only calls **your own domai
 | `recent.html` · `aired.html` · `upcoming.html` · `search.html` | listing pages |
 | `details.html` | details, **Add to list**, comments with animated reactions + stickers |
 | `watch.html` | player (resumes the last episode, tracks Continue Watching and watched episodes) |
-| `profile.html` | your dashboard: banner + avatar card, rank/VP, badges, favorites, **Customize** (display name, 5 effect slots, banner presets, default avatar), **Pictures** (galleries, crop, set main), Continue Watching, Watch List, Settings (bio, privacy, username, password, devices) |
+| `profile.html` | your dashboard in a Telegram-style layout (cover + centred avatar + action tiles + info rows on the left, underline tabs on the right): rank/VP, badges, favorites, **Customize** (display name, 5 effect slots, banner presets, default avatar), **Pictures** (galleries, crop, set main), Continue Watching, Watch List, Settings (bio, privacy, username, password, devices) |
 | `shop.html` | **Void Shop**: 101 effects, titles, sticker packs, live previews with your own avatar/name |
 | `user.html?u=name` | public profile |
 
 Code: `assets/site.js` (auth popup, menu, avatars/names/titles, continue-watching store, footer), `icons.js` (all icons, liquid badges, animated reactions, **no emoji anywhere**), `stickers.js` (40 original animated stickers), `community.js`, `cropper.js`, `profile*.js`, `shop.js`, `home.js`, page scripts in `assets/pages/`.
-Styles: `style.css` (base) → `site.css` → `effects.css` (**generated**, see below) → `theme.css` (Aurora Ink) → page CSS.
+Styles: `style.css` (base) → `site.css` → `effects.css` (**generated**: name effects + card styles) → `decorations.css` (avatar overlay animations) → `bannerfx.css` (banner scenes + free print-pattern presets) → `theme.css` (Ink & Vermilion: flat colour, hard outlines and offset shadows, screentone dots) → page CSS.
+Decorations: `fx-recipes.js` (**generated** recipes) + `decorations.js` (draws 106 illustrated SVG overlays, hover = faster animation, click = spark burst). Banner scenes: `bannerfx.js` (31 animated particle fields and silhouettes).
 
 ## Vercel setup
 Settings → Environment Variables: `BACKEND_URL` (e.g. `https://anivoid-api-xxxx.onrender.com`) and `PROXY_SECRET` (same value as on the backend). Redeploy after changing them, then open `/api/v1/_debug`.
@@ -27,7 +28,7 @@ Files that must be in the repo root: `vercel.json` (rewrite `/api/v1/*` to `api/
 * All user text is rendered with escaping/`textContent`; uploaded pictures are re-encoded by the backend.
 
 ## Effects CSS
-`assets/effects.css` is generated from the backend catalog: in the backend repo run `python tools/gen_effects.py ../AniVoidTV/assets/effects.css`. Item id `frame.spin_aurora` ⇄ class `fx-frame-spin_aurora`.
+`assets/effects.css` and `assets/fx-recipes.js` are generated from the backend catalog: in the backend repo run `python tools/gen_effects.py ../AniVoidTV/assets/effects.css ../AniVoidTV/assets/fx-recipes.js`. Decoration/banner ids (`frame.ivy_wreath`, `banner.tokyo_night`) are looked up in the recipes; name/card ids map to CSS classes (`fx-name-grad_ember`).
 
 ## Notes
 * Friends and Notifications tabs show "coming soon" (next update).
